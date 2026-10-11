@@ -4,3 +4,4 @@ __pycache__/
 venv/
 .venv/
 .vscode/
+try_waste.py
