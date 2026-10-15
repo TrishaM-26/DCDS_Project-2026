@@ -1,10 +1,18 @@
+import os
+import certifi
 from pymongo import MongoClient
-from config import MONGO_URI, MONGO_DB
+from dotenv import load_dotenv
 
-# Created ONCE when the module is first imported, then reused everywhere.
-_client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-_db = _client[MONGO_DB]
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+MONGO_DB = os.getenv("MONGO_DB")
+# Temporary bypass for local testing behind strict networks
+_client = MongoClient(MONGO_URI, tls=True, tlsAllowInvalidCertificates=True)
+
+# Initialize client with certifi handling the SSL certificate
+_client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
+db = _client[MONGO_DB]
 
 def get_collection(name):
-    """Return a collection, e.g. get_collection('waste_logs')."""
-    return _db[name]
+    return db[name]

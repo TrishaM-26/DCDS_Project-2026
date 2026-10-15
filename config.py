@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv   # pip install python-dotenv
+from pathlib import Path
 
-load_dotenv()  # reads the .env file into environment variables
+load_dotenv(Path(__file__).parent / ".env")  # reads the .env file into environment variables
 
 MYSQL = {
     "host": os.getenv("MYSQL_HOST"),
