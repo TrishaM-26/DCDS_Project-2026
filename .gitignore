@@ -1,7 +1,5 @@
-.env
-__pycache__/
-*.pyc
 venv/
-.venv/
-.vscode/
-try_waste.py
+__pycache__/
+.env
+exports/
+.pytest_cache/
